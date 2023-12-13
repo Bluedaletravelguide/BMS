@@ -1155,7 +1155,7 @@ if (isset($_POST["importcontact2"])) {
         // echo "<script type='text/javascript'>alert('start');</script>";
 
         $targetPath = 'uploads/' . $_FILES['excel']['name'];
-        move_uploaded_file($_FILES['excel']['name'], $targetPath);
+        move_uploaded_file($_FILES['excel']['tmp_name'], $targetPath);
 
         $Reader = new Xlsx();
         // debug_to_console("startread");
