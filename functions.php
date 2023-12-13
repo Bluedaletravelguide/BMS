@@ -27,7 +27,7 @@ $errors = array();
 $errors2 = array();
 
 // connect to the database
-$db = mysqli_connect($_ENV['DB_HOST'], $_ENV['DB_USER'], $_ENV['DB_PASSWORD'], $_ENV['DB_DATABASE8']);
+$db = mysqli_connect($_ENV['DB_HOST2'], $_ENV['DB_USER2'], $_ENV['DB_PASSWORD2'], $_ENV['DB_DATABASE8']);
 
 
 
