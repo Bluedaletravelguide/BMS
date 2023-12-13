@@ -27,7 +27,7 @@ $errors = array();
 $errors2 = array();
 
 // connect to the database
-$db = mysqli_connect($_ENV['DB_HOST'], $_ENV['DB_USER2'], $_ENV['DB_PASSWORD2'], $_ENV['DB_DATABASE8']);
+$db = mysqli_connect($_ENV['DB_HOST'], $_ENV['DB_USER'], $_ENV['DB_PASSWORD'], $_ENV['DB_DATABASE8']);
 
 
 
@@ -1144,6 +1144,8 @@ if (isset($_POST["newcontact2"])) {
 
 
 if (isset($_POST["importcontact2"])) {
+    debug_to_console("startread");
+
     $allowedFileType = [
         'application/vnd.ms-excel',
         'text/xls',
@@ -1155,10 +1157,14 @@ if (isset($_POST["importcontact2"])) {
         // echo "<script type='text/javascript'>alert('start');</script>";
 
         $targetPath = 'uploads/' . $_FILES['excel']['name'];
-        move_uploaded_file($_FILES['excel']['tmp_name'], $targetPath);
+        $moved = move_uploaded_file($_FILES['excel']['tmp_name'], $targetPath);
+        if( $moved ) {
+            debug_to_console('sukses bossku');
+        } else {
+            debug_to_console($_FILES["excel"]["error"]);
 
+          }
         $Reader = new Xlsx();
-        debug_to_console("startread");
         $spreadSheet = $Reader->load($targetPath);
 
         $excelSheet = $spreadSheet->getActiveSheet();
@@ -1256,7 +1262,11 @@ if (isset($_POST["importcontact2"])) {
     } else {
         $type = "error";
         $message = "Invalid File Type. Upload Excel File.";
+        debug_to_console($type);
+        debug_to_console($message);
+
     }
+    
     // header('Location: ' . $_SERVER['REQUEST_URI']);
     // exit();
 }
