@@ -1165,6 +1165,7 @@ if (isset($_POST["importcontact2"])) {
 
         }
         $Reader = new Xlsx();
+
         $spreadSheet = $Reader->load($targetPath);
 
         $excelSheet = $spreadSheet->getActiveSheet();
@@ -1266,6 +1267,7 @@ if (isset($_POST["importcontact2"])) {
 
     }
     unlink($targetPath);
+
 
     header('Location: ' . $_SERVER['REQUEST_URI']);
     exit();
