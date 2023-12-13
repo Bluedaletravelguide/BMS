@@ -27,7 +27,7 @@ $errors = array();
 $errors2 = array();
 
 // connect to the database
-$db = mysqli_connect($_ENV['DB_HOST'], $_ENV['DB_USER2'], $_ENV['DB_PASSWORD2'], $_ENV['DB_DATABASE8']);
+$db = mysqli_connect($_ENV['DB_HOST'], $_ENV['DB_USER'], $_ENV['DB_PASSWORD'], $_ENV['DB_DATABASE8']);
 
 
 
@@ -1144,6 +1144,8 @@ if (isset($_POST["newcontact2"])) {
 
 
 if (isset($_POST["importcontact2"])) {
+    debug_to_console("startread");
+
     $allowedFileType = [
         'application/vnd.ms-excel',
         'text/xls',
@@ -1155,10 +1157,15 @@ if (isset($_POST["importcontact2"])) {
         // echo "<script type='text/javascript'>alert('start');</script>";
 
         $targetPath = 'uploads/' . $_FILES['excel']['name'];
-        move_uploaded_file($_FILES['excel']['tmp_name'], $targetPath);
+        $moved = move_uploaded_file($_FILES['excel']['tmp_name'], $targetPath);
+        if ($moved) {
+            debug_to_console('sukses bossku');
+        } else {
+            debug_to_console($_FILES["excel"]["error"]);
 
+        }
         $Reader = new Xlsx();
-        // debug_to_console("startread");
+
         $spreadSheet = $Reader->load($targetPath);
 
         $excelSheet = $spreadSheet->getActiveSheet();
@@ -1185,7 +1192,7 @@ if (isset($_POST["importcontact2"])) {
             if (isset($spreadSheetAry[$i][0])) {
 
                 $company_name = mysqli_real_escape_string($db, $spreadSheetAry[$i][0]);
-            
+
             }
             if (isset($spreadSheetAry[$i][1])) {
                 $company_email = mysqli_real_escape_string($db, $spreadSheetAry[$i][1]);
@@ -1251,12 +1258,17 @@ if (isset($_POST["importcontact2"])) {
             // }
 
         }
-        // unlink($targetPath);
 
     } else {
         $type = "error";
         $message = "Invalid File Type. Upload Excel File.";
+        debug_to_console($type);
+        debug_to_console($message);
+
     }
+    unlink($targetPath);
+
+
     header('Location: ' . $_SERVER['REQUEST_URI']);
     exit();
 }
@@ -1353,4 +1365,55 @@ if (isset($_POST["contacttodo_email"])) {
     header('Location: ' . $_SERVER['REQUEST_URI']);
     exit();
 }
+if (isset($_POST["contact2"])) {
+
+    $data = array();
+
+    $query = "SELECT * FROM contacts2   ";
+    $result = mysqli_query($db, $query);
+    while ($row = mysqli_fetch_assoc($result)) {
+        $data[] = $row;
+    }
+
+    echo json_encode($data);
+}
+
+
+if (isset($_POST["contact2-list-post"])) {
+    $query = "SELECT * FROM contacts2todo GROUP BY list_created_date   ";
+    $result = mysqli_query($db, $query);
+    $data = array();
+
+    while ($row = mysqli_fetch_assoc($result)) {
+        $date_created = $row['list_created_date'];
+        $date = strtotime($row['list_created_date']);
+        $formatteddate = date('d-m-Y', $date);
+
+        $listname = $row['list_name'];
+        $yearnow = date('Y');
+        $list_created_by = $row['list_created_by'];
+        $list_created_for = $row['list_created_for'];
+
+        $btnfunc = "openModalEditList('$list_created_by','$date_created','$listname','$list_created_for')";
+
+
+        $action1 = '<button type="submit" class="btn btn-primary m-1" name="editcontactlist"
+        onclick="' . $btnfunc . '">Edit</button>';
+        $action2 = "<a href='contact2-list.php?query=$listname&year=$yearnow' class='btn btn-primary m-1'>See</a>
+";
+
+        $data[] = array(
+            "date" => $formatteddate,
+            "name" => $listname,
+            "created_by" => $list_created_by,
+            "created_for" => $list_created_for,
+            "action" => $action1 . $action2,
+        );
+
+    }
+    echo json_encode($data,JSON_UNESCAPED_SLASHES);
+
+}
+
+
 ?>
