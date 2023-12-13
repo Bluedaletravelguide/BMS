@@ -57,79 +57,7 @@
 
                   </tr>
                 </thead>
-                <tbody>
-                  <?php
 
-                  $query = "SELECT * FROM contacts2todo GROUP BY list_created_date   ";
-                  $result = mysqli_query($db, $query);
-                  while ($row = mysqli_fetch_assoc($result)) { ?>
-                    <tr>
-                      <th scope="row">
-                        <?php
-                        $date = strtotime($row['list_created_date']);
-                        $formatteddate = date('d-m-Y', $date);
-                        echo $formatteddate;
-
-                        ?>
-                      </th>
-                      <td>
-                        <?php echo $row['list_name'] ?>
-                      </td>
-                      <td>
-                        <?php echo $row['list_created_by'] ?>
-                      </td>
-                      <td>
-                        <?php echo $row['list_created_for'] ?>
-                      </td>
-                      <td>
-                        <button type="submit" class="btn btn-primary" name="editcontactlist"
-                          onclick="openModalEditList('<?php echo $row['list_created_by'] ?>','<?php echo $row['list_created_date'] ?>','<?php echo $row['list_name'] ?>','<?php echo $row['list_created_for'] ?>')">Edit</button>
-                        <a href="contact2-list.php?query=<?php echo $row['list_name'] ?>&year=<?php echo date('Y')?>" class="btn btn-primary">See</a>
-
-                        <form method="post" action="#">
-                          <!-- <button class="btn btn-primary" href="#" data-bs-toggle="modal"
-                            data-bs-target="#addcontact2">Edit</a> -->
-                          <!-- <input type="hidden" name="list_name" value="<?php echo $row['list_name'] ?>"> -->
-                          <!-- <input type="hidden" name="list_created_date" value="<?php echo $formatteddate ?>"> -->
-                          <!-- <button type="submit" class="btn btn-primary" name="editcontactlist">Insert</button> -->
-                        </form>
-                      </td>
-
-                    </tr>
-
-
-
-                  <?php }
-
-                  ?>
-
-                  <!-- <tr>
-                    <th scope="row">1</th>
-                    <td>Royal Gold</td>
-                    <td>
-                      <div class="btn btn-success rounded-pill">Complete</div>
-                    </td>
-                    <td>17/10/23</td>
-                    <td> <a type="button" class="btn btn-primary">Update</a>
-                    </td>
-                  </tr> -->
-
-                  <!-- 
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Royal Gold</td>
-                    <td> <button type="button" class="btn btn-warning rounded-pill" data-bs-toggle="modal"
-                        data-bs-target="#verticalycentered">
-                        In Progress
-                      </button></td>
-                    <td>17/11/23</td>
-
-                    <td> <a type="button" class="btn btn-primary">Update</a>
-                    </td>
-                  </tr> -->
-
-
-                </tbody>
               </table>
               <!-- End Table with stripped rows -->
 
@@ -168,52 +96,8 @@
                     <th scope="col">Industry</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <?php
-
-                  $query = "SELECT * FROM contacts2   ";
-                  $result = mysqli_query($db, $query);
-                  while ($row = mysqli_fetch_assoc($result)) { ?>
-                    <tr>
-                      <th scope="row">
-                        <?php
-                        $date = strtotime($row['date_insert']);
-                        $formatteddate = date('d-m-Y', $date);
-                        echo $formatteddate;
-
-                        ?>
-                      </th>
-                      <td>
-                        <?php echo $row['company_name'] ?>
-                      </td>
-                      <td>
-                        <?php echo $row['company_email'] ?>
-                      </td>
-                      <td>
-                        <?php echo $row['company_phone_office'] ?>
-                      </td>
-                      <td>
-                        <?php echo $row['company_phone_mobile'] ?>
-                      </td>
-                      <td>
-                        <?php echo $row['city'] ?>
-                      </td>
-                      <td>
-                        <?php echo $row['state'] ?>
-                      </td>
-                      <td>
-                        <?php echo $row['country'] ?>
-                      </td>
-                      <td>
-                        <?php echo $row['industry'] ?>
-                      </td>
-                    </tr>
-
-
-
-                  <?php }
-
-                  ?>
+                <!-- <tbody> -->
+             
 
                   <!-- <tr>
                     <th scope="row">1</th>
@@ -241,7 +125,7 @@
                   </tr> -->
 
 
-                </tbody>
+                <!-- </tbody> -->
               </table>
               <!-- End Table with stripped rows -->
 

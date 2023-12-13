@@ -21,11 +21,31 @@
             "scrollCollapse": true,
             select: true,
             keys: true,
+            processing: true,
+            serverMethod: 'post',
+            ajax: {
+                type: 'POST',
+                url: 'functions.php',
+                dataSrc: '',
+                data: {'contact2' : 'contact2'},
+            },
+            columns: [
+                { data: 'date_insert' },
+                { data: 'company_name' },
+                { data: 'company_email' },
+                { data: 'company_phone_office' },
+                { data: 'company_phone_mobile' },
+                { data: 'city' },
+                { data: 'state' },
+                { data: 'country' },
+                { data: 'industry' },
+
+            ],
+
             dom: 'BQlfrtip',
             searchBuilder: {
                 columns: [1, 2, 8]
             },
-            "processing": true,
             buttons: [
                 'copy', {
                     extend: 'excel',
@@ -66,6 +86,7 @@
                         //     new Blob( [ JSON.stringify( data ) ] ),
                         //     'Export.json'
                         // );
+                        table3.ajax.reload(null, false);
                         $.post('functions.php', {
                             data: data.body,
                             exportcontact2: "exportcontact2"
@@ -115,10 +136,27 @@
     }
     if ($("#example3").length) {
 
-        $('#example3').DataTable({
+        var table3 = $('#example3').DataTable({
             "scrollY": "650px",
             "sScrollX": "100%",
             "scrollCollapse": true,
+            processing: true,
+            serverMethod: 'post',
+            ajax: {
+                type: 'POST',
+                url: 'functions.php',
+                dataSrc: '',
+                data: {'contact2-list-post' : 'contact2-list-post'},
+            },
+            columns: [
+                { data: 'date' },
+                { data: 'name' },
+                { data: 'created_by' },
+                { data: 'created_for' },
+                { data: 'action' },
+
+
+            ],
         })
         $("#example3").width("100%");
 
