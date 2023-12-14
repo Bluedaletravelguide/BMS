@@ -1284,8 +1284,8 @@ if (isset($_POST["exportcontact2"])) {
     // print_r($songData);
     foreach ($postdata as $x => $val) {
         // print_r($val[0]);
-        $query = "INSERT INTO contacts2todo (list_created_by,company_name, company_email) 
-  			  VALUES('$useremail','$val[1]', '$val[2]')";
+        $query = "INSERT INTO contacts2todo (list_created_by,company_name, company_email,industry) 
+  			  VALUES('$useremail','$val[1]', '$val[2]', '$val[9]')";
         mysqli_query($db, $query);
     }
     header('Location: ' . $_SERVER['REQUEST_URI']);
@@ -1380,7 +1380,7 @@ if (isset($_POST["contact2"])) {
 
 
 if (isset($_POST["contact2-list-post"])) {
-    $query = "SELECT * FROM contacts2todo GROUP BY list_created_date   ";
+    $query = "SELECT * FROM contacts2todo GROUP BY list_created_date  ORDER BY id DESC ";
     $result = mysqli_query($db, $query);
     $data = array();
 

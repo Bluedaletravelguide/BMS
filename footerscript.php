@@ -27,7 +27,7 @@
                 type: 'POST',
                 url: 'functions.php',
                 dataSrc: '',
-                data: {'contact2' : 'contact2'},
+                data: { 'contact2': 'contact2' },
             },
             columns: [
                 { data: 'date_insert' },
@@ -50,32 +50,34 @@
                 'copy', {
                     extend: 'excel',
                     text: 'Excel',
-                    exportOptions: {
-                        modifier: {
-                            selected: null
-                        }
-                    }
-                }, {
-                    extend: 'pdfHtml5',
-                    orientation: 'landscape',
-                    pageSize: 'A4',
-                    exportOptions: {
-                        modifier: {
-                            selected: null
-                        }
-                    },
-                    customize: function (doc) {
-                        var colCount = new Array();
-                        $(tbl).find('tbody tr:first-child td').each(function () {
-                            if ($(this).attr('colspan')) {
-                                for (var i = 1; i <= $(this).attr('colspan'); $i++) {
-                                    colCount.push('*');
-                                }
-                            } else { colCount.push('*'); }
-                        });
-                        doc.content[1].table.widths = colCount;
-                    }
-                }, 'print',
+                    // exportOptions: {
+                    //     modifier: {
+                    //         selected: null
+                    //     }
+                    // }
+                },
+                // {
+                //     extend: 'pdfHtml5',
+                //     orientation: 'landscape',
+                //     pageSize: 'A4',
+                //     exportOptions: {
+                //         modifier: {
+                //             selected: null
+                //         }
+                //     },
+                //     customize: function (doc) {
+                //         var colCount = new Array();
+                //         $(tbl).find('tbody tr:first-child td').each(function () {
+                //             if ($(this).attr('colspan')) {
+                //                 for (var i = 1; i <= $(this).attr('colspan'); $i++) {
+                //                     colCount.push('*');
+                //                 }
+                //             } else { colCount.push('*'); }
+                //         });
+                //         doc.content[1].table.widths = colCount;
+                //     }
+                // },
+                //  'print',
                 {
                     text: 'Export List',
                     action: function (e, dt, button, config) {
@@ -86,13 +88,14 @@
                         //     new Blob( [ JSON.stringify( data ) ] ),
                         //     'Export.json'
                         // );
-                        table3.ajax.reload(null, false);
                         $.post('functions.php', {
                             data: data.body,
                             exportcontact2: "exportcontact2"
                         }, function (response) {
                             console.log(response);
                         });
+                        table3.ajax.reload(null, false);
+
                     }
                 }
             ]
@@ -111,24 +114,27 @@
             },
             "processing": true,
             buttons: [
-                'copy', {
+                'copy',
+                 {
                     extend: 'excel',
                     text: 'Excel',
-                    exportOptions: {
-                        modifier: {
-                            selected: null
-                        }
-                    }
-                }, {
-                    extend: 'pdfHtml5',
-                    orientation: 'landscape',
-                    pageSize: 'A4',
-                    exportOptions: {
-                        modifier: {
-                            selected: null
-                        }
-                    }
-                }, 'print',
+                    // exportOptions: {
+                    //     modifier: {
+                    //         selected: null
+                    //     }
+                    // }
+                },
+                // {
+                //     extend: 'pdfHtml5',
+                //     orientation: 'landscape',
+                //     pageSize: 'A4',
+                //     exportOptions: {
+                //         modifier: {
+                //             selected: null
+                //         }
+                //     }
+                // },
+                // 'print',
 
             ]
         });
@@ -146,7 +152,7 @@
                 type: 'POST',
                 url: 'functions.php',
                 dataSrc: '',
-                data: {'contact2-list-post' : 'contact2-list-post'},
+                data: { 'contact2-list-post': 'contact2-list-post' },
             },
             columns: [
                 { data: 'date' },
@@ -184,7 +190,8 @@
                             selected: null
                         }
                     }
-                }, 'print',
+                },
+                //  'print',
 
             ]
         });
