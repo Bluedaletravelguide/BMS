@@ -1281,15 +1281,15 @@ if (isset($_POST["exportcontact2"])) {
 
     $postdata = $_POST['data'];
     $useremail = $_SESSION['email'];
-    // print_r($songData);
+    var_dump($postdata);
     foreach ($postdata as $x => $val) {
         // print_r($val[0]);
-        $query = "INSERT INTO contacts2todo (list_created_by,company_name, company_email,industry) 
-  			  VALUES('$useremail','$val[1]', '$val[2]', '$val[9]')";
+        $query = "INSERT INTO contacts2todo (list_created_by,company_name, company_email,company_phone_office,company_phone_mobile,city,state,country,industry) 
+  			  VALUES('$useremail','$val[1]', '$val[2]', '$val[3]','$val[4]','$val[5]','$val[6]','$val[7]','$val[8]')";
         mysqli_query($db, $query);
     }
-    header('Location: ' . $_SERVER['REQUEST_URI']);
-    exit();
+    // header('Location: ' . $_SERVER['REQUEST_URI']);
+    // exit();
 }
 
 
