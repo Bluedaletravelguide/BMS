@@ -14,7 +14,7 @@ if (isset($_GET['logout'])) {
 <html lang="en">
 
 <head>
-<title>Dashboard - NiceAdmin Bootstrap Template</title>
+<title>Dashboard - BMS</title>
 <meta content="" name="description">
   <meta content="" name="keywords">
   <?php  include 'head.php'?>
@@ -41,6 +41,7 @@ if (isset($_GET['logout'])) {
     </div><!-- End Page Title -->
 
     <section class="section dashboard">
+      <?php  if ($dev != 1) { ?>
       <div class="row">
 
         <!-- Left side columns -->
@@ -672,6 +673,8 @@ if (isset($_GET['logout'])) {
         </div><!-- End Right side columns -->
 
       </div>
+
+      <?php } ?>
     </section>
 
   </main><!-- End #main -->

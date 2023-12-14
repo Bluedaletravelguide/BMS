@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-  <title>Dashboard - NiceAdmin Bootstrap Template</title>
+  <title>Contact To Do - BMS</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
   <?php include 'head.php' ?>
@@ -131,7 +131,7 @@
 
                         <td scope="row">
                           <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
-                          <input type="hidden" name="email" value="<?php echo  $_SESSION['email'] ?>">
+                          <input type="hidden" name="email" value="<?php echo $_SESSION['email'] ?>">
 
                           <?php
                           $datecheck = date('m-Y');

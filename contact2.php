@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-  <title>Dashboard - NiceAdmin Bootstrap Template</title>
+<title>Contact 2  - BMS</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
   <?php include 'head.php' ?>
