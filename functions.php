@@ -1144,7 +1144,7 @@ if (isset($_POST["newcontact2"])) {
 
 
 if (isset($_POST["importcontact2"])) {
-    debug_to_console("startread");
+    // debug_to_console("startread");
 
     $allowedFileType = [
         'application/vnd.ms-excel',
@@ -1159,9 +1159,9 @@ if (isset($_POST["importcontact2"])) {
         $targetPath = 'uploads/' . $_FILES['excel']['name'];
         $moved = move_uploaded_file($_FILES['excel']['tmp_name'], $targetPath);
         if ($moved) {
-            debug_to_console('sukses bossku');
+            // debug_to_console('sukses bossku');
         } else {
-            debug_to_console($_FILES["excel"]["error"]);
+            // debug_to_console($_FILES["excel"]["error"]);
 
         }
         $Reader = new Xlsx();
@@ -1171,7 +1171,7 @@ if (isset($_POST["importcontact2"])) {
         $excelSheet = $spreadSheet->getActiveSheet();
         $spreadSheetAry = $excelSheet->toArray();
         $sheetCount = count($spreadSheetAry);
-        debug_to_console($sheetCount);
+        // debug_to_console($sheetCount);
 
         // echo "<script type='text/javascript'>alert('$sheetCount');</script>";
 
@@ -1262,14 +1262,14 @@ if (isset($_POST["importcontact2"])) {
     } else {
         $type = "error";
         $message = "Invalid File Type. Upload Excel File.";
-        debug_to_console($type);
-        debug_to_console($message);
+        // debug_to_console($type);
+        // debug_to_console($message);
 
     }
     unlink($targetPath);
 
-
-    header('Location: ' . $_SERVER['REQUEST_URI']);
+    $urlserver = $_SERVER['REQUEST_URI'];
+    header("Location: $urlserver");
     exit();
 }
 
@@ -1411,7 +1411,7 @@ if (isset($_POST["contact2-list-post"])) {
         );
 
     }
-    echo json_encode($data,JSON_UNESCAPED_SLASHES);
+    echo json_encode($data, JSON_UNESCAPED_SLASHES);
 
 }
 
